@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+    <title>AI Images</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
+    
+    <!-- Load TensorFlow.js. This is required to use coco-ssd model. -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.0/dist/tf.min.js"></script>
+    <!-- Load the coco-ssd model. -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd"> </script>
+    <script src="js/main.js"></script>
+    <script type='text/javascript'>
+        function preview_image(event) 
+     {
+      var reader = new FileReader();
+      reader.onload = function() {
+       var output = document.getElementById('previewImage');
+       output.src = reader.result;
+       console.log(reader.result)
+    //    url=
+      }
+      reader.readAsDataURL(event.target.files[0]);
+     }
+        </script>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand navbar-dark bg-dark">
+            <a class="navbar-brand" href="/">AI Images</a>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Home<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="about.html">About</a>
+                </li>
+                </ul>
+            </div>
+            <h2 class="result"><span></span></h2>
+        </nav>
+    </header>
+    <main>
+            <div class="jumbotron container" style="background-color: #fff;">
+                <h1 class="display-4">Image Classifier</h1>
+                
+                <!-- <form id="upload-file" method="post" enctype="multipart/form-data">
+                    <label for="imageUpload" class="upload-label">
+                        <a id="uploadCTA" class="btn btn-info btn-lg" href="#" role="button" style="margin: 1.5rem 0 0;">Upload</a>
+                    </label>
+                    <input type="file" name="image" id="imageUpload" accept=".png, .jpg, .jpeg">
+
+                </form> -->
+                    <form id="upload-file" method="post" enctype="multipart/form-data">
+                        <label for="imageUpload" class="upload-label" style="display: block;">
+                                <p class="lead">Upload an Image, and using AI Models we'll predict what it is!</p>
+                        </label>
+                        <input type="file" name="image" id="imageUpload" accept=".png, .jpg, .jpeg" style="display: block;" onchange="preview_image(event)">
+                        <a id="btn-upload" class="btn btn-info btn-lg" href="#" role="button" style="margin: 1.5rem 0 0;">Upload</a>
+                    </form>
+
+                
+                <hr class="my-4">
+
+                <div class="image-section">
+                        <img src="#" alt="uploaded image" id="previewImage" style="
+                   width: 300px;
+                    height: 300px;
+                    margin:0 0 1.5rem;
+                ">
+                        <button type="button" class="btn btn-primary btn-lg " id="btn-predict" style="display:block;">Predict</button>
+                </div>
+                <div class="results" style="padding:40px 0;">
+                    <div class="loader"></div>
+                    <h2 id="prediction"></h2>
+                </div>
+                
+            </div>
+        </main>
+        
+        
+</body>
+</html>
